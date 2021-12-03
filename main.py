@@ -20,9 +20,31 @@ def retrieve_file_Java_comment_tags(tokenized_text):
             file_comment_list.extend([(keyword, comment_index)])
     return file_comment_list
 
+def remove_comments(tokenized_text, comment_map):
+    comment_open = 0
+    comment_start = 0
+    comment_end = 0
+    tokenized_text = [list(item) for item in tokenized_text[0]]
+
+    for comment_position in comment_map:
+
+        if comment_position[0][0] == "/*":
+            if comment_open == 0:
+                comment_open = 1
+                comment_start = comment_position[1]
+        if comment_position[0][0] == "*/":
+            if comment_open == 1:
+                comment_end = comment_position[1]
+                comment_open = 0
+                for token_index, token in enumerate(tokenized_text[comment_start:comment_end + 1]):
+                    tokenized_text[token_index + comment_start][1] = 'delete'
+
+    return tokenized_text
 
 print(tokenize_text('java.txt'))
 text_in_tokens = tokenize_text('java.txt')
 print(retrieve_file_Java_identifiers(text_in_tokens))
 token_map = retrieve_file_Java_comment_tags(text_in_tokens)
 print(token_map)
+tokenized_text_with_comments_marked = remove_comments(text_in_tokens, token_map)
+print(tokenized_text_with_comments_marked)
