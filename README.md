@@ -45,4 +45,4 @@ Distributed under the MIT License. See [LICENSE](https://spdx.org/licenses/MIT.h
 
 Lefteris Soulis - lefteris95.soulis@gmail.com
 
-Project Link: [https://github.com/leFos-95/FullStackDev](https://github.com/leFos-95/FullStackDev)
+Project Link: [https://github.com/leFos-95/Python-Parser-and-Tokenizer](https://github.com/leFos-95/Python-Parser-and-Tokenizer)
