@@ -41,6 +41,13 @@ def remove_comments(tokenized_text, comment_map):
 
     return tokenized_text
 
+def retrieve_class_names(tokenized_text):
+    class_names = []
+    for tok_ind, tok in enumerate(tokenized_text):
+        if tok[0] == 'class' and tok[1] not in ['string', 'comment']:
+            class_names.append(tokenized_text[tok_ind + 1][0])
+    return class_names
+
 print(tokenize_text('java.txt'))
 text_in_tokens = tokenize_text('java.txt')
 print(retrieve_file_Java_identifiers(text_in_tokens))
@@ -48,3 +55,6 @@ token_map = retrieve_file_Java_comment_tags(text_in_tokens)
 print(token_map)
 tokenized_text_with_comments_marked = remove_comments(text_in_tokens, token_map)
 print(tokenized_text_with_comments_marked)
+print(nesting_level(text_in_tokens))
+tokenized_text_with_strings_class_names = retrieve_class_names(tokenized_text_with_comments_marked)
+print(tokenized_text_with_strings_class_names)
