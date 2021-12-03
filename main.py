@@ -48,6 +48,24 @@ def retrieve_class_names(tokenized_text):
             class_names.append(tokenized_text[tok_ind + 1][0])
     return class_names
 
+def nesting_level(tokenized_text):
+    tokenized_text = [list(item) for item in tokenized_text]
+
+    nest_level_counter = 0
+    max_level = 0
+
+    for tok in tokenized_text:
+
+        if tok[0] == '{':
+
+            nest_level_counter += 1
+            if (nest_level_counter > max_level):
+                max_level = nest_level_counter
+        elif tok[0] == '}':
+            nest_level_counter -= 1
+
+    return max_level
+
 print(tokenize_text('java.txt'))
 text_in_tokens = tokenize_text('java.txt')
 print(retrieve_file_Java_identifiers(text_in_tokens))
@@ -57,3 +75,4 @@ tokenized_text_with_comments_marked = remove_comments(text_in_tokens, token_map)
 print(tokenized_text_with_comments_marked)
 tokenized_text_with_strings_class_names = retrieve_class_names(tokenized_text_with_comments_marked)
 print(tokenized_text_with_strings_class_names)
+print(nesting_level(tokenized_text_with_comments_marked))
