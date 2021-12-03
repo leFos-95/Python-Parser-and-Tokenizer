@@ -68,11 +68,12 @@ def nesting_level(tokenized_text):
 
 print(tokenize_text('java.txt'))
 text_in_tokens = tokenize_text('java.txt')
-print(retrieve_file_Java_identifiers(text_in_tokens))
 token_map = retrieve_file_Java_comment_tags(text_in_tokens)
-print(token_map)
 tokenized_text_with_comments_marked = remove_comments(text_in_tokens, token_map)
-print(tokenized_text_with_comments_marked)
 tokenized_text_with_strings_class_names = retrieve_class_names(tokenized_text_with_comments_marked)
+
+print(retrieve_file_Java_identifiers(text_in_tokens))
+print(token_map)
+print(tokenized_text_with_comments_marked)
 print(tokenized_text_with_strings_class_names)
 print(nesting_level(tokenized_text_with_comments_marked))
