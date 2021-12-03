@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Nov 13 18:11:57 2015
-
-@author: Student
-"""
 
 import common_data
 import re
