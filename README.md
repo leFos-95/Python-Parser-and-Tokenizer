@@ -33,7 +33,22 @@ To get a local copy up and running follow these steps.
 
    ```
 
-2. Run the application
+2. Open cmd and type:
+
+   ```sh
+   pip install nltk
+   
+   ```
+
+3. Type python:
+
+   ```sh
+   import nltk
+   nltk.download('wordnet')
+   
+   ```
+
+4. Run the application
 
 ## License
 
