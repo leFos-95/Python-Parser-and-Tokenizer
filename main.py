@@ -1,6 +1,7 @@
 import common_data
 from tokenizer import scanner
 from collections import defaultdict
+from nltk.corpus import wordnet
 
 def tokenize_text(file_path):
     with open(file_path, 'r') as f:
@@ -100,6 +101,24 @@ def frequency_keywords(tokenized_text):
     return counter, "Total number of frequency keywords is: ", counts
 
 
+def english_word(tokenized_text):  # Petros Papaioannou
+    tokenized_text = [list(item) for item in tokenized_text[0]]
+    is_isnt = [0, 0]
+    for item in tokenized_text:
+        if (item[0] != " "):
+            if (wordnet.synsets(item[0])):
+                print
+                "Tokenized item: '", item[0], "' is an english word."
+                is_isnt[0] += 1
+            else:
+                print
+                "Tokenized item: '", item[0], "' is not an english word."
+                is_isnt[1] += 1
+
+    print("English words found: ", is_isnt[0], ".")
+    print("Non - English words found: ", is_isnt[1], ".")
+
+
 
 
 
@@ -121,4 +140,5 @@ tokenized_text_with_comments_and_string_contents_marked = retrieve_str_tokens(to
 # print(nesting_level(tokenized_text_with_comments_marked))
 # print(tokenized_text_with_frequency_keywords)
 print(tokenized_text_with_comments_and_string_contents_marked)
+english_word(text_in_tokens)
 
