@@ -40,7 +40,7 @@ To get a local copy up and running follow these steps.
    
    ```
 
-3. Type python:
+3. At cmd type python and then:
 
    ```sh
    import nltk
