@@ -22,6 +22,25 @@ def retrieve_file_Java_comment_tags(tokenized_text):
             file_comment_list.extend([(keyword, comment_index)])
     return file_comment_list
 
+def retrieve_str_tokens(tokenized_text):
+    open_string = 0
+    #    print tokenized_text
+    for tok_index, tok in enumerate(tokenized_text):
+        if tok[0] == '"':
+            if open_string == 0:
+                open_string = 1
+                tok[1] = "string_content"
+            else:
+                if tokenized_text[tok_index-1][0] != '//':
+                    open_string = 0
+                tok[1] = "string_content"
+        else:
+            if open_string == 1:
+                tok[1] = "string_content"
+
+
+    return tokenized_text
+
 def remove_comments(tokenized_text, comment_map):
     comment_open = 0
     comment_start = 0
@@ -78,8 +97,7 @@ def frequency_keywords(tokenized_text):
             counter[token[0]] += 1
             counts += 1
 
-    print("Total number of frequency keywords is: ", counts)
-    return counter
+    return counter, "Total number of frequency keywords is: ", counts
 
 
 
@@ -91,11 +109,16 @@ text_in_tokens = tokenize_text('java.txt')
 token_map = retrieve_file_Java_comment_tags(text_in_tokens)
 tokenized_text_with_comments_marked = remove_comments(text_in_tokens, token_map)
 tokenized_text_with_strings_class_names = retrieve_class_names(tokenized_text_with_comments_marked)
+tokenized_text_with_frequency_keywords = frequency_keywords(text_in_tokens)
+tokenized_text_with_comments_and_string_contents_marked = retrieve_str_tokens(tokenized_text_with_comments_marked)
 
 
-print(retrieve_file_Java_identifiers(text_in_tokens))
-print(token_map)
-print(tokenized_text_with_comments_marked)
-print(tokenized_text_with_strings_class_names)
-print(nesting_level(tokenized_text_with_comments_marked))
-print(frequency_keywords(text_in_tokens))
+
+# print(retrieve_file_Java_identifiers(text_in_tokens))
+# print(token_map)
+# print(tokenized_text_with_comments_marked)
+# print(tokenized_text_with_strings_class_names)
+# print(nesting_level(tokenized_text_with_comments_marked))
+# print(tokenized_text_with_frequency_keywords)
+print(tokenized_text_with_comments_and_string_contents_marked)
+
