@@ -31,7 +31,7 @@ def retrieve_str_tokens(tokenized_text):
                 open_string = 1
                 tok[1] = "string_content"
             else:
-                if tokenized_text[tok_index-1][0] != '//':
+                if tokenized_text[0] != '//':
                     open_string = 0
                 tok[1] = "string_content"
         else:
