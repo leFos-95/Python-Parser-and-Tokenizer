@@ -1,4 +1,6 @@
+import common_data
 from tokenizer import scanner
+from collections import defaultdict
 
 def tokenize_text(file_path):
     with open(file_path, 'r') as f:
@@ -66,14 +68,34 @@ def nesting_level(tokenized_text):
 
     return max_level
 
+
+def frequency_keywords(tokenized_text):
+    counter = defaultdict(int)
+    counts = 0
+    tokenized_text = [list(item) for item in tokenized_text]
+    for token in tokenized_text[0]:
+        if token[0] in common_data.keyword_list:
+            counter[token[0]] += 1
+            counts += 1
+
+    print("Total number of frequency keywords is: ", counts)
+    return counter
+
+
+
+
+
+
 print(tokenize_text('java.txt'))
 text_in_tokens = tokenize_text('java.txt')
 token_map = retrieve_file_Java_comment_tags(text_in_tokens)
 tokenized_text_with_comments_marked = remove_comments(text_in_tokens, token_map)
 tokenized_text_with_strings_class_names = retrieve_class_names(tokenized_text_with_comments_marked)
 
+
 print(retrieve_file_Java_identifiers(text_in_tokens))
 print(token_map)
 print(tokenized_text_with_comments_marked)
 print(tokenized_text_with_strings_class_names)
 print(nesting_level(tokenized_text_with_comments_marked))
+print(frequency_keywords(text_in_tokens))
